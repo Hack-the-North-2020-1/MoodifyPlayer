@@ -2,8 +2,9 @@ from flask import flash, redirect, render_template, url_for, Blueprint, request,
 import json, requests
 
 from models.user import User
-from settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+from settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, GENIUS_CLIENT_ID, GENIUS_CLIENT_SECRET
 from services.spotify import Spotify
+from services.genius import Genius
 
 blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -22,12 +23,36 @@ def spotifyCallback():
 
     if access_token is None:
         flash("Could not authorize request. Try again", 'danger')
-        return '', 404
+        return redirect(url_for('home.home'))
 
-    user = User.signin(access_token)
+    user = User.spotify_signin(access_token)
 
     session['user_id'] = user.id
-    session['access_token'] = access_token
+    session['spotify_access_token'] = access_token
+
+    return redirect(url_for('home.home'))
+
+@blueprint.route('/login/genius')
+def geniusLogin():
+    genius = Genius(GENIUS_CLIENT_ID, GENIUS_CLIENT_SECRET)
+    return redirect(genius.auth_url(scope="me"))
+
+@blueprint.route('/callback/genius', methods=["GET", "POST"])
+def geniusCallback():
+    if 'code' not in request.args:
+        return redirect(url_for('home.home'))
+
+    genius = Genius(GENIUS_CLIENT_ID, GENIUS_CLIENT_SECRET)
+    access_token = f"Bearer {genius.get_token(request.args['code'])}"
+
+    if access_token is None:
+        flash("Could not authorize request. Try again", 'danger')
+        return redirect(url_for('home.home'))
+
+    user = User.genius_signin(access_token)
+
+    # session['user_id'] = user.id
+    session['genius_access_token'] = access_token
 
     return redirect(url_for('home.home'))
 

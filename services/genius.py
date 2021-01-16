@@ -1,12 +1,12 @@
 import requests, json, base64
 from urllib.parse import urlencode
 
-spotify_api_url = "https://api.spotify.com/v1"
-oauth_url = "https://accounts.spotify.com/authorize"
-api_token_url = "https://accounts.spotify.com/api/token"
-redirect_uri = "http://127.0.0.1:5000/auth/callback/spotify"
+genius_api_url = "https://api.genius.com/"
+oauth_url = "https://api.genius.com/oauth/authorize"
+api_token_url = "https://api.genius.com/oauth/token"
+redirect_uri = "http://127.0.0.1:5000/auth/callback/genius"
 
-class Spotify():
+class Genius():
     def __init__(self, client_id="", client_secret="", access_token=""):
         self.client_id = client_id
         self.client_secret = client_secret
@@ -36,13 +36,13 @@ class Spotify():
 
         return response.get('access_token', None)
 
-    def search(self=None, query=None, search_type='track'):
+    def search(self=None, query=None):
 
         if isinstance(query, dict):
             query = " ".join([f"{k}:{v}" for k, v in query.items()])
 
-        search_url = urlencode({"q": query, "type": search_type.lower()})
-        url = spotify_api_url + '/search?' + search_url
+        search_url = urlencode({"q": query})
+        url = genius_api_url + '/search?' + search_url
         headers = {'Authorization': f"{self.access_token}"}
         data = requests.get(url, headers=headers).json()
 
@@ -50,7 +50,7 @@ class Spotify():
 
     @staticmethod
     def find_user(access_token):
-        url = spotify_api_url + '/me'
+        url = genius_api_url + '/account'
         headers={'Authorization': f"{access_token}"}
 
         data = requests.get(url, headers=headers).json()
