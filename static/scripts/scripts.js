@@ -1,13 +1,17 @@
-function subscribeToImages(cb){
+var imageContainer = document.getElementById("image-container");
+var image = document.getElementById("image-placeholder");
+
+function subscribeToImages(updateImage){
     //connect to the hashtag namespace
     const socket = io();
     socket.emit("subscribeToImages", "someuserid");
-    socket.on("imageData", data => cb(data));
+    socket.on("imageData", data => updateImage(data));
 }
 
-function cb(data){
+function updateImage(data){
     console.log(data);
+    image.src = data;
 }
 
-subscribeToImages(cb);
+subscribeToImages(updateImage);
 console.log("subscribeToImages");
