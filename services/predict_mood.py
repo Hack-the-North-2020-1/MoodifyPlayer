@@ -1,12 +1,13 @@
 import pickle
 import spotipy
 from spotipy import SpotifyClientCredentials, util
+from settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 
 import pandas as pd
 import tensorflow as tf
 
-client_id='1d7092e8554d4fd6ae2c882843ede6eb'
-client_secret='18bedb36e0ec420f96db8245e7c3664a'
+client_id=SPOTIFY_CLIENT_ID
+client_secret=SPOTIFY_CLIENT_SECRET
 
 class MusicToMood():
 
