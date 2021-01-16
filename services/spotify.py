@@ -1,4 +1,5 @@
 import requests, json, base64
+from urllib.parse import urlencode
 
 spotify_api_url = "https://api.spotify.com/v1"
 oauth_url = "https://accounts.spotify.com/authorize"
@@ -34,6 +35,19 @@ class Spotify():
         response = requests.post(api_token_url, data=data, headers=headers).json()
 
         return response.get('access_token', None)
+
+    def search(self=None, query=None, operator=None, operator_query=None, search_type='track'):
+
+
+        if isinstance(query, dict):
+            query = " ".join([f"{k}:{v}" for k, v in query.items()])
+
+        search_url = urlencode({"q": query, "type": search_type.lower()})
+        url = spotify_api_url + '/search?' + search_url
+        headers = {'Authorization': f"{self.access_token}"}
+        data = requests.get(url, headers=headers).json()
+
+        return data
 
     @staticmethod
     def find_user(access_token):
