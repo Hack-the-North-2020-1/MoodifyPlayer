@@ -5,8 +5,8 @@ from spotipy import SpotifyClientCredentials, util
 import pandas as pd
 import tensorflow as tf
 
-client_id='1d7092e8554d4fd6ae2c882843ede6eb'
-client_secret='18bedb36e0ec420f96db8245e7c3664a'
+client_id='<client_id>'
+client_secret='<client_secret>'
 
 class MusicToMood():
 
