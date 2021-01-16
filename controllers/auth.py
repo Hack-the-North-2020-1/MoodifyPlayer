@@ -12,7 +12,7 @@ def spotifyLogin():
     spotify = Spotify(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
     return redirect(spotify.auth_url(scope="user-read-email"))
 
-@blueprint.route('/callback/spotify')
+@blueprint.route('/callback/spotify', methods=["GET", "POST"])
 def spotifyCallback():
     if 'code' not in request.args:
         return '', 500
@@ -29,7 +29,6 @@ def spotifyCallback():
     session['user_id'] = user.id
     session['access_token'] = access_token
 
-    print('here')
     return redirect(url_for('home.home'))
 
 @blueprint.route('/logout')
@@ -43,7 +42,5 @@ def get_current_user():
 
     if user_id is None:
         g.user = None
-        print('No g.user: ', g.user)
     else:
         g.user = User.query.filter_by(id=user_id).first()
-        print('Present g.user: ', g.user)
