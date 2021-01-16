@@ -25,10 +25,20 @@ class Spotify():
         }
         
         data={
+            'client_id': self.client_id,
             'code': code, 
-            'grant_type': "client_credentials",
+            'grant_type': "authorization_code",
+            'redirect_uri': redirect_uri
         }
 
-        data = requests.post(api_token_url, data=data, headers=headers).json()
+        response = requests.post(api_token_url, data=data, headers=headers).json()
 
-        return data.get('access_token', None)
+        return response.get('access_token', None)
+
+    @staticmethod
+    def find_user(access_token):
+        url = spotify_api_url + '/me'
+        headers={'Authorization': f"{access_token}"}
+
+        data = requests.get(url, headers=headers).json()
+        return data
