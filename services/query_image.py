@@ -1,9 +1,7 @@
 import requests
 
-
 key = "74b3dd84769d49a886d087347a06933e"
 api_endpoint = "https://api.bing.microsoft.com/v7.0/images/search"
-
 
 
 class BingImageQuery():
