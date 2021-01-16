@@ -1,6 +1,7 @@
 import requests
+from settings import AZURE_IMAGE_API_KEY
 
-key = "74b3dd84769d49a886d087347a06933e"
+key = AZURE_IMAGE_API_KEY
 api_endpoint = "https://api.bing.microsoft.com/v7.0/images/search"
 
 
