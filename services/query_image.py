@@ -3,20 +3,25 @@ import requests
 
 key = "74b3dd84769d49a886d087347a06933e"
 api_endpoint = "https://api.bing.microsoft.com/v7.0/images/search"
-search_term = 'happy'
+
 
 
 class BingImageQuery():
 
-    def query_images(self, search_query):
+    def __init__(self):
+        self.images = []
 
-        params = dict(q=search_term, count=20)
+    def query_images(self, search_query='happy'):
+        params = dict(q=search_query, count=20)
         image_results = requests.get(api_endpoint, headers={"Ocp-Apim-Subscription-Key": key}, params=params)
         res = image_results.json()
-        print(res.get('value'))
+        im_metadata = res.get('value')
+        for item in im_metadata:
+            self.images.append(item.get('contentUrl'))
+        print(self.images)
 
 
 bing = BingImageQuery()
-bing.query_images('happy')
+bing.query_images()
 
 
