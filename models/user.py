@@ -17,8 +17,6 @@ class User(db.Model):
     def signin(access_token):
         data = Spotify.find_user(access_token)
 
-        print("data: ", data)
-
         instance = User.query.filter_by(username=data['display_name']).first()
 
         if not instance:
