@@ -3,7 +3,7 @@ const image = document.getElementById("image-placeholder");
 const songnameContainer = document.getElementById("songname");
 const artistnameContainer = document.getElementById("artistname");
 
-let access_token = "BQD7885wOoR0neRH-_-28PylwK6nZJhUxnfDvuFrvtuFhJn97-pyTVhov5fx_IrXxDkU1zge9f7KLdLvjPSNZp4-s1R6jJiqGA9uOkT6Ss-ZAGFjq06qlEV7ux8kZCLkyFjF6Esg11swHF4szcqo4Y_f-3UyfKGpTA6jUB2l9dDtp55DInINngU";
+let access_token = "BQAI-Tsf0ME13IfHCeRI96kNjTnK0CM5pmvqJfw3kfQU2whMvFj5oPgO3cWwudaQaTqU3agVF0-h0h9v6gkJKjKPEe25FRdcMhCqYFxLIPmLjwn-lv9MmWoIikYDqUloUnpZ1ixMj1nDtg3GpbPp7LT_txteGFw0";
 let player;
 let device_id;
 
@@ -34,7 +34,7 @@ function startSong(song_id){
         _options: {
             getOAuthToken,
             id
-        }
+         }
         }
     }) => {
         getOAuthToken(access_token => {
@@ -47,7 +47,7 @@ function startSong(song_id){
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${access_token}`
             },
-        });
+         });
         });
     };
 
@@ -79,29 +79,23 @@ function startSong(song_id){
         songname = songnameContainer.value;
         artistname = artistnameContainer.value;
 
-        token = "BQAw4Mnaa1B0s_7jgPmQ9fu85rvkmD4qHnW2qZ8Gr9E2gef9iVNI1HF4ICRjVOdz8PnYZn1dQDc5FgbLvEWTX1EK8mLLNOdaoMfOl2Gsmwh6sw7nYXtpHg3XAbOwPmqMMXcqMamX1Utt7QOVA8VRvgHtUqyGcbe3soJsM_AK894"
-
         song_id = "7xGfFoTpQ2E7fRF5lN10tr";
-
-        startSong(song_id);
         
-    //     fetch(`/artist:${artistname}&song:${songname}`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type' : 'application/json',
-    //             'Authorization' : 'Bearer ' + token
-    //         }
-    //     })
-    //     .then(res=>res.text())
-    //     .then(data=> {
-    //         song_id = "7xGfFoTpQ2E7fRF5lN10tr"
-    //         startSong(song_id);
-    //     }
-    //     )
-    //     .catch(err=>{
-    //         console.log(err);
-    //    })
-        startSont(song_id);
+        fetch(`/artist:${artistname}&song:${songname}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization' : 'Bearer ' + access_token
+            }
+        })
+        .then(res=>res.text())
+        .then(data=> {
+            startSong(data);
+        }
+        )
+        .catch(err=>{
+            console.log(err);
+        })
     }
 
 subscribeToImages(updateImage);
