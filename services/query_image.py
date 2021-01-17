@@ -10,8 +10,8 @@ class BingImageQuery():
     def __init__(self):
         self.images = []
 
-    def query_images(self, search_query='happy'):
-        params = dict(q=search_query, count=20)
+    def query_images(self, search_query='happy', count=5):
+        params = dict(q=search_query, count=count)
         image_results = requests.get(api_endpoint, headers={"Ocp-Apim-Subscription-Key": key}, params=params)
         res = image_results.json()
         im_metadata = res.get('value')
@@ -19,8 +19,10 @@ class BingImageQuery():
             self.images.append(item.get('contentUrl'))
         print(self.images)
 
+        return self.images
 
-bing = BingImageQuery()
-bing.query_images()
+
+# bing = BingImageQuery()
+# bing.query_images()
 
 
