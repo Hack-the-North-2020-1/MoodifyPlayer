@@ -1,5 +1,4 @@
 from services.spotify import Spotify
-from services.genius import Genius
 from extensions import db
 
 class User(db.Model):
@@ -29,21 +28,3 @@ class User(db.Model):
             db.session.commit()
         
         return instance
-
-    @staticmethod
-    def genius_signin(access_token):
-        data = Genius.find_user(access_token)
-
-        print("user data: ", data)
-
-        # instance = User.query.filter_by(username=data['display_name']).first()
-
-        # if not instance:
-        #     if(len(data['images'])):
-        #         instance = User(data['display_name'], data['images'], data['id'])
-            
-        #     instance = User(username=data['display_name'], spotify_id=data['id'])
-        #     db.session.add(instance)
-        #     db.session.commit()
-        
-        # return instance

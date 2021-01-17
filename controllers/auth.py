@@ -2,9 +2,8 @@ from flask import flash, redirect, render_template, url_for, Blueprint, request,
 import json, requests
 
 from models.user import User
-from settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, GENIUS_CLIENT_ID, GENIUS_CLIENT_SECRET
+from settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 from services.spotify import Spotify
-from services.genius import Genius
 
 blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
