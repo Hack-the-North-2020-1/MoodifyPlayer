@@ -16,8 +16,9 @@ class BingImageQuery():
         image_results = requests.get(api_endpoint, headers={"Ocp-Apim-Subscription-Key": key}, params=params)
         res = image_results.json()
         im_metadata = res.get('value')
-        for item in im_metadata:
-            self.images.append(item.get('contentUrl'))
+        if im_metadata is not None:
+            for item in im_metadata:
+                self.images.append(item.get('contentUrl'))
         print(self.images)
 
         return self.images

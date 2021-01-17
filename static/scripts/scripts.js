@@ -28,6 +28,7 @@ function playsong(event){
             'Authorization' : 'Bearer ' + token
         }
     })
+    .then(res=>res.text())
     .then(data=> {
         console.log(data);
      }
