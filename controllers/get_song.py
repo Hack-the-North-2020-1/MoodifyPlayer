@@ -12,4 +12,4 @@ def get_song(artist, song):
     spotify = Spotify(access_token=access_token)
     id = spotify.search(query)['tracks']['items'][0]['id']
 
-    return { "id": id }
+    return id

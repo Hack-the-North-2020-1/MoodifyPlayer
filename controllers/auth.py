@@ -30,6 +30,8 @@ def spotifyCallback():
     access_token = f"Bearer {response['access_token']}"
     refresh_token = f"{response['refresh_token']}"
 
+    print("the token is", access_token)
+
     if access_token is None:
         flash("Could not authorize request. Try again", 'danger')
         return redirect(url_for('home.home'))

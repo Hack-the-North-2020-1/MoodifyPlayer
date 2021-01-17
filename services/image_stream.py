@@ -22,6 +22,7 @@ def create_socket(socketio):
     def listener(counter_list, room, user):
         # print(f"image_ready: {user.image_ready}, user: {user.username}")
         images = []
+        print(user)
         if user.image_ready:
             if path.isfile("static/urls.txt"):
                 images = open("static/urls.txt").readlines()

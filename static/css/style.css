@@ -24,3 +24,43 @@
   width: 100%;
   background-color:rgb(51, 48, 48);
 }
+
+#songname {
+  width: 220px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+#artistname {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+#image-placeholder{
+  border: 5px solid #555;
+}
+
+#smily-face{
+  position: absolute;
+  top: 287px;
+  right: 200px
+}
+
+#smily-face-top{
+  position: absolute;
+  top: 10px;
+  left: 120px
+}
+
+#music{
+  position: absolute;
+  top: 255px;
+  right: 190px
+}
