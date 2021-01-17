@@ -37,22 +37,22 @@ class MusicToMood():
         return y_classification[0]
 
 # some testing
-musicClassifier = MusicToMood(client_id, client_secret)
-
-# Welcome to New York
-print(musicClassifier.predict_mood("6qnM0XXPZOINWA778uNqQ9"))
-
-# Willow
-print(musicClassifier.predict_mood("0lx2cLdOt3piJbcaXIV74f"))
-
-# ME!
-print(musicClassifier.predict_mood("2Rk4JlNc2TPmZe2af99d45"))
-
-# I'm in here
-print(musicClassifier.predict_mood("07OLYWQfwfJKJIwO1heCME"))
-
-# The Man
-print(musicClassifier.predict_mood("3RauEVgRgj1IuWdJ9fDs70"))
-
-# Perfect
-print(musicClassifier.predict_mood("0tgVpDi06FyKpA1z0VMD4v"))
+# musicClassifier = MusicToMood(client_id, client_secret)
+#
+# # Welcome to New York
+# print(musicClassifier.predict_mood("6qnM0XXPZOINWA778uNqQ9"))
+#
+# # Willow
+# print(musicClassifier.predict_mood("0lx2cLdOt3piJbcaXIV74f"))
+#
+# # ME!
+# print(musicClassifier.predict_mood("2Rk4JlNc2TPmZe2af99d45"))
+#
+# # I'm in here
+# print(musicClassifier.predict_mood("07OLYWQfwfJKJIwO1heCME"))
+#
+# # The Man
+# print(musicClassifier.predict_mood("3RauEVgRgj1IuWdJ9fDs70"))
+#
+# # Perfect
+# print(musicClassifier.predict_mood("0tgVpDi06FyKpA1z0VMD4v"))
