@@ -3,11 +3,11 @@ const image = document.getElementById("image-placeholder");
 const songnameContainer = document.getElementById("songname");
 const artistnameContainer = document.getElementById("artistname");
 
-let access_token = "BQD7c5oeZ5gjhiuqbWsUNTOTV-RjhWav-6X1X8hzhhssXQWoHWWR9EkRI9tNQE5imNuUfXDHXrxOY3w6uvHVFpEov4lRGOD3CvNWJacKDSMXjNZy5d9iErLw_9bEOw8yfvW1yA8h66nAn9k8XV45zCijghtVPGIO";
+// let access_token = "BQD7c5oeZ5gjhiuqbWsUNTOTV-RjhWav-6X1X8hzhhssXQWoHWWR9EkRI9tNQE5imNuUfXDHXrxOY3w6uvHVFpEov4lRGOD3CvNWJacKDSMXjNZy5d9iErLw_9bEOw8yfvW1yA8h66nAn9k8XV45zCijghtVPGIO";
 let player;
 let device_id;
 
-function startSong(song_id){
+function startSong(song_id, access_token){
     if (player){
         player.disconnect();
     }
@@ -17,7 +17,7 @@ function startSong(song_id){
         getOAuthToken: cb => { cb(access_token); },
         volume: 0.1
     });
-
+    
     // Error handling
     player.addListener('initialization_error', ({ message }) => { console.error(message); });
     player.addListener('authentication_error', ({ message }) => { console.error(message); });
@@ -84,22 +84,35 @@ function startSong(song_id){
         artistname = artistnameContainer.value;
 
         song_id = "7xGfFoTpQ2E7fRF5lN10tr";
+
+        let result = fetch("/auth/token", {
+            method: "GET"
+        })
+        .then(res=>res.text())
+        .catch(err=>{
+            console.log(err);
+        });
         
-        fetch(`/artist:${artistname}&song:${songname}`, {
+        result.then((token)=>{
+            console.log(token);
+            fetch(`/artist:${artistname}&song:${songname}`, {
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization' : 'Bearer ' + access_token
+                'Authorization' : 'Bearer ' + token
+              }
+            })
+            .then(res=>res.text())
+            .then(data=> {
+                console.log(data);
+                startSong(data, token);
             }
-        })
-        .then(res=>res.text())
-        .then(data=> {
-            startSong(data);
-        }
+            )
+            .catch(err=>{
+                console.log(err);
+            })
+          }
         )
-        .catch(err=>{
-            console.log(err);
-        })
     }
 
 subscribeToImages(updateImage);

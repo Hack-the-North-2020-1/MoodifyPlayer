@@ -11,7 +11,7 @@ blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 @blueprint.route('/token')
 def refresh_token():
     spotify = Spotify(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
-    token_response = spotify.get_token(code=session['refresh_token'], refresh_token=True)
+    token_response = spotify.get_token(code=session['refresh_token'], refresh_token=True)['access_token']
 
     return token_response
 
