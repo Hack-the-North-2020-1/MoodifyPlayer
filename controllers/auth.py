@@ -32,30 +32,6 @@ def spotifyCallback():
 
     return redirect(url_for('home.home'))
 
-@blueprint.route('/login/genius')
-def geniusLogin():
-    genius = Genius(GENIUS_CLIENT_ID, GENIUS_CLIENT_SECRET)
-    return redirect(genius.auth_url(scope="me"))
-
-@blueprint.route('/callback/genius', methods=["GET", "POST"])
-def geniusCallback():
-    if 'code' not in request.args:
-        return redirect(url_for('home.home'))
-
-    genius = Genius(GENIUS_CLIENT_ID, GENIUS_CLIENT_SECRET)
-    access_token = f"Bearer {genius.get_token(request.args['code'])}"
-
-    if access_token is None:
-        flash("Could not authorize request. Try again", 'danger')
-        return redirect(url_for('home.home'))
-
-    user = User.genius_signin(access_token)
-
-    # session['user_id'] = user.id
-    session['genius_access_token'] = access_token
-
-    return redirect(url_for('home.home'))
-
 @blueprint.route('/logout')
 def logout():
     session.clear()
