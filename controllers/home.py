@@ -8,6 +8,7 @@ from services.keyword_extractor import KeywordExtractor
 from settings import SPOTIFY_CLIENT_SECRET, SPOTIFY_CLIENT_ID
 from models.user import User
 from extensions import db
+from os import path
 import os
 
 
@@ -24,12 +25,17 @@ def home():
         spotify = Spotify(access_token=session['spotify_access_token'])
 
         if request.method == "POST":
-            os.remove("static/urls.txt")
+
+            if os.path.isfile("static/urls.txt"):
+                os.remove("static/urls.txt")
+
             user_id = session.get('user_id')
             user = User.query.filter_by(id=user_id).first()
             user.image_ready = False
             db.session.commit()
+
             print(f"start of new post request, url_list: {url_list}")
+
             track = request.form['song_request']
             artist = request.form['artist']
 

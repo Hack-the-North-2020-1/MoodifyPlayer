@@ -2,7 +2,7 @@ from services.poll_listeners import register_time_listener
 from flask_socketio import join_room, leave_room
 from flask import session
 from models.user import User
-
+from os import path
 # hardcoded images
 
 def create_socket(socketio):
@@ -21,10 +21,13 @@ def create_socket(socketio):
 
     def listener(counter_list, room, user):
         # print(f"image_ready: {user.image_ready}, user: {user.username}")
+        images = []
         if user.image_ready:
-            images = open("static/urls.txt").readlines()
+            if path.isfile("static/urls.txt"):
+                images = open("static/urls.txt").readlines()
             print("send image")
-            socketio.emit("imageData", images[len(counter_list)], room=room)
+            if images:
+                socketio.emit("imageData", images[len(counter_list)], room=room)
             counter_list.append(1)
 
     socketio.on_event("subscribeToImages", onSubsribeToImages)

@@ -4,6 +4,7 @@ import json, requests
 from models.user import User
 from settings import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 from services.spotify import Spotify
+import os
 
 blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -33,6 +34,7 @@ def spotifyCallback():
 
 @blueprint.route('/logout')
 def logout():
+    os.remove("static/urls.txt")
     session.clear()
     return redirect(url_for('home.home'))
 
