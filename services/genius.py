@@ -12,6 +12,3 @@ class Genius():
         lyrics = song.lyrics
 
         return lyrics
-
-# genius = Genius()
-# print(genius.get_lyrics('Taylor Swift', 'Welcome to New York').replace("'", r"\'"))
