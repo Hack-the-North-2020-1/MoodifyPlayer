@@ -1,5 +1,6 @@
 venv
 .env
 .idea/
+static/urls.txt
 
 __pycache__

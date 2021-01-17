@@ -24,6 +24,7 @@ def create_app():
 def register_blueprints(app):
     app.register_blueprint(controllers.auth.blueprint)
     app.register_blueprint(controllers.home.blueprint)
+    app.register_blueprint(controllers.get_song.blueprint)
 
     return None
 
