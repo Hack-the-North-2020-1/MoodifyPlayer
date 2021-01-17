@@ -2,7 +2,7 @@ from services.spotify import Spotify
 from extensions import db
 
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = 'spotify_user'
 
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -14,7 +14,7 @@ class User(db.Model):
         self.spotify_id = spotify_id
 
     @staticmethod
-    def signin(access_token):
+    def spotify_signin(access_token):
         data = Spotify.find_user(access_token)
 
         instance = User.query.filter_by(username=data['display_name']).first()

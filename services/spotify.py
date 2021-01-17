@@ -36,8 +36,7 @@ class Spotify():
 
         return response.get('access_token', None)
 
-    def search(self=None, query=None, operator=None, operator_query=None, search_type='track'):
-
+    def search(self=None, query=None, search_type='track'):
 
         if isinstance(query, dict):
             query = " ".join([f"{k}:{v}" for k, v in query.items()])

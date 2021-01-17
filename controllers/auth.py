@@ -22,12 +22,12 @@ def spotifyCallback():
 
     if access_token is None:
         flash("Could not authorize request. Try again", 'danger')
-        return '', 404
+        return redirect(url_for('home.home'))
 
-    user = User.signin(access_token)
+    user = User.spotify_signin(access_token)
 
     session['user_id'] = user.id
-    session['access_token'] = access_token
+    session['spotify_access_token'] = access_token
 
     return redirect(url_for('home.home'))
 
