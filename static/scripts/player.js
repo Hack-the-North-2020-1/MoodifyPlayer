@@ -1,3 +1,5 @@
+var access_token = "BQBMv70FTPenqibDAy6pFXc5QsmvmUXHtPc_qPuaGDH7PGCyd2i3AkgvyGlX0qWa2Lww6_QUsXchbzeTfECPp5GVMBzN1Ryk7HQMZGr-9jt6CRpMjE5c1_PmKN7BtDJgmYG91Ay3yLtHUjcq7LdgC5d1DC40zbHcguRuu-_p-_XTUjbPiWIytUg"
+
 window.onSpotifyWebPlaybackSDKReady = () => {
     player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
@@ -49,3 +51,4 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     // Connect to the player!
     player.connect();
+  }
