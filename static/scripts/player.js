@@ -49,3 +49,4 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     // Connect to the player!
     player.connect();
+  }

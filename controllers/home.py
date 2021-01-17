@@ -26,7 +26,7 @@ def home():
 
         if os.path.isfile("static/urls.txt"):
             os.remove("static/urls.txt")
-        
+
         user_id = session.get('user_id')
         user = User.query.filter_by(id=user_id).first()
         user.image_ready = False
