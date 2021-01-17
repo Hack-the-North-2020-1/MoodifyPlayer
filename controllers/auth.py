@@ -8,10 +8,17 @@ import os
 
 blueprint = Blueprint('auth', __name__, url_prefix='/auth')
 
+@blueprint.route('/token')
+def refresh_token():
+    spotify = Spotify(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
+    token_response = spotify.get_token(code=session['refresh_token'], refresh_token=True)
+
+    return token_response
+
 @blueprint.route('/login/spotify')
 def spotifyLogin():
     spotify = Spotify(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
-    return redirect(spotify.auth_url(scope="user-read-email"))
+    return redirect(spotify.auth_url(scope="streaming user-read-email user-read-private"))
 
 @blueprint.route('/callback/spotify', methods=["GET", "POST"])
 def spotifyCallback():
@@ -19,7 +26,9 @@ def spotifyCallback():
         return '', 500
 
     spotify = Spotify(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
-    access_token = f"Bearer {spotify.get_token(request.args['code'])}"
+    response = spotify.get_token(request.args['code'])
+    access_token = f"Bearer {response['access_token']}"
+    refresh_token = f"{response['refresh_token']}"
 
     print("the token is", access_token)
 
@@ -31,12 +40,14 @@ def spotifyCallback():
 
     session['user_id'] = user.id
     session['spotify_access_token'] = access_token
+    session['refresh_token'] = refresh_token
 
     return redirect(url_for('home.home'))
 
 @blueprint.route('/logout')
 def logout():
-    os.remove("static/urls.txt")
+    if os.path.isfile("static/urls.txt"):
+        os.remove("static/urls.txt")
     session.clear()
     return redirect(url_for('home.home'))
 

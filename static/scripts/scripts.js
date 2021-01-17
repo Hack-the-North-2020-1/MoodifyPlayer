@@ -14,7 +14,8 @@ function startSong(song_id){
     console.log("starting song...");
     player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(access_token); }
+        getOAuthToken: cb => { cb(access_token); },
+        volume: 0.1
     });
 
     // Error handling
