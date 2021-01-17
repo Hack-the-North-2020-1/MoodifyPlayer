@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="text-gray-light text-center py-5 my-5">
-   <form action='#' method="post" onsubmit="return playsong()">
+   <form action='#' method="post" onsubmit="return playsong(event)">
        <input id="songname" type="text" name='song_request' placeholder="enter song request here">
        <input id="artistname" type="text" name="artist" placeholder="enter artist name here">
        <input type="submit" value="Submit">

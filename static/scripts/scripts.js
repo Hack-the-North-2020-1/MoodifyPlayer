@@ -11,7 +11,7 @@ function startSong(song_id){
     console.log("starting song...");
     player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
-    getOAuthToken: cb => { cb(access_token); }
+        getOAuthToken: cb => { cb(access_token); }
     });
 
     // Error handling
@@ -75,6 +75,7 @@ function startSong(song_id){
     }
 
     function playsong(event){
+        event.preventDefault();
         songname = songnameContainer.value;
         artistname = artistnameContainer.value;
 
@@ -100,6 +101,7 @@ function startSong(song_id){
     //     .catch(err=>{
     //         console.log(err);
     //    })
+        startSont(song_id);
     }
 
 subscribeToImages(updateImage);
