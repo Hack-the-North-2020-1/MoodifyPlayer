@@ -1,9 +1,10 @@
-var access_token = "BQBMv70FTPenqibDAy6pFXc5QsmvmUXHtPc_qPuaGDH7PGCyd2i3AkgvyGlX0qWa2Lww6_QUsXchbzeTfECPp5GVMBzN1Ryk7HQMZGr-9jt6CRpMjE5c1_PmKN7BtDJgmYG91Ay3yLtHUjcq7LdgC5d1DC40zbHcguRuu-_p-_XTUjbPiWIytUg"
+var access_token = "BQDkFkUCakGWxCwtvWyvDct7b-NTbUNHwoRJa18S6qI5XUyn7uTWmpJORw6cEJuViyH6SQeRDsXcYzrrnv53Jkwcq-VCwrlmNUDzlWJO6j69oaq72IfSjT6VyvWBGL27dL5Fc_I73_eEFXMisY9HOjinltTpksCK2h8rY7lHpkNN0pj4XFsb2Tg"
 
 window.onSpotifyWebPlaybackSDKReady = () => {
     player = new Spotify.Player({
       name: 'Web Playback SDK Quick Start Player',
-      getOAuthToken: cb => { cb(access_token); }
+      getOAuthToken: cb => { cb(access_token); },
+      volume: 0.1
     });
 
     // Error handling
