@@ -7,11 +7,14 @@ class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     profile_url = db.Column(db.String(80), nullable=True)
+    urls = db.Column(db.Text, nullable=True)
+    image_ready = db.Column(db.Boolean, nullable=True)
 
-    def __init__(self, username='', profile_url='', spotify_id=''):
+    def __init__(self, username='', profile_url='', spotify_id='', image_ready=False):
         self.username = username
         self.profile_url = profile_url
         self.spotify_id = spotify_id
+        self.image_ready = image_ready
 
     @staticmethod
     def spotify_signin(access_token):
