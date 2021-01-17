@@ -32,8 +32,8 @@ def home():
         user.image_ready = False
         db.session.commit()
         print(f"start of new post request, url_list: {url_list}")
-        track = request.form['song_request']
-        artist = request.form['artist']
+        track = request.get_json()['song_request']
+        artist = request.get_json()['artist']
 
         lyrics = Genius.get_lyrics(artist=artist, song=track)
         lyrics = lyrics.replace("'", r"\'")

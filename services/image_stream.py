@@ -23,9 +23,8 @@ def create_socket(socketio):
         # print(f"image_ready: {user.image_ready}, user: {user.username}")
         images = []
         print(user)
-        if user.image_ready:
-            if path.isfile("static/urls.txt"):
-                images = open("static/urls.txt").readlines()
+        if path.isfile("static/urls.txt"):
+            images = open("static/urls.txt").readlines()
             print("send image")
             if images:
                 socketio.emit("imageData", images[len(counter_list)], room=room)

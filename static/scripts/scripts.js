@@ -113,7 +113,26 @@ function startSong(song_id, access_token){
             })
           }
         )
+        fetch(`/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+              },
+            body: JSON.stringify({song_request:songname, artist:artistname})
+            });
     }
+
+//function call(artistname,songname){
+//        fetch(`/`, {
+//            method: 'POST',
+//            headers: {
+//                'Content-Type' : 'application/json',
+//                'Authorization' : 'Bearer ' + token
+//              },
+//            body:`artist=${artistname}&song_request=${songname}`
+//            });
+//}
+
 
 subscribeToImages(updateImage);
 console.log("subscribeToImages");
