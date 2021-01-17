@@ -21,6 +21,8 @@ def spotifyCallback():
     spotify = Spotify(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET)
     access_token = f"Bearer {spotify.get_token(request.args['code'])}"
 
+    print("the token is", access_token)
+
     if access_token is None:
         flash("Could not authorize request. Try again", 'danger')
         return redirect(url_for('home.home'))
