@@ -8,6 +8,7 @@ from services.keyword_extractor import KeywordExtractor
 from settings import SPOTIFY_CLIENT_SECRET, SPOTIFY_CLIENT_ID
 from models.user import User
 from extensions import db
+from os import path
 import os
 
 
@@ -22,7 +23,8 @@ def home():
 
     if g.user and request.method == "POST":
         spotify = Spotify(access_token=session['spotify_access_token'])
-        os.remove("static/urls.txt")
+        if os.path.isfile("static/urls.txt"):
+            os.remove("static/urls.txt")
         user_id = session.get('user_id')
         user = User.query.filter_by(id=user_id).first()
         user.image_ready = False
@@ -58,5 +60,5 @@ def home():
     elif not g.user and request.method == "POST":
         return render_template('403.html')
 
-    
+ 
     return render_template("home/home.html")
