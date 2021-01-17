@@ -3,11 +3,14 @@ const image = document.getElementById("image-placeholder");
 const songnameContainer = document.getElementById("songname");
 const artistnameContainer = document.getElementById("artistname");
 
-let access_token = "BQAI-Tsf0ME13IfHCeRI96kNjTnK0CM5pmvqJfw3kfQU2whMvFj5oPgO3cWwudaQaTqU3agVF0-h0h9v6gkJKjKPEe25FRdcMhCqYFxLIPmLjwn-lv9MmWoIikYDqUloUnpZ1ixMj1nDtg3GpbPp7LT_txteGFw0";
+let access_token = "BQD7c5oeZ5gjhiuqbWsUNTOTV-RjhWav-6X1X8hzhhssXQWoHWWR9EkRI9tNQE5imNuUfXDHXrxOY3w6uvHVFpEov4lRGOD3CvNWJacKDSMXjNZy5d9iErLw_9bEOw8yfvW1yA8h66nAn9k8XV45zCijghtVPGIO";
 let player;
 let device_id;
 
 function startSong(song_id){
+    if (player){
+        player.disconnect();
+    }
     console.log("starting song...");
     player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
