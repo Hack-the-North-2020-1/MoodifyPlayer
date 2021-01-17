@@ -11,6 +11,7 @@ class BingImageQuery():
         self.images = []
 
     def query_images(self, search_query='happy', count=5):
+        self.images.clear()
         params = dict(q=search_query, count=count)
         image_results = requests.get(api_endpoint, headers={"Ocp-Apim-Subscription-Key": key}, params=params)
         res = image_results.json()
