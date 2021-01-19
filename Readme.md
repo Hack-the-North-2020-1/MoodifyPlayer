@@ -11,7 +11,7 @@ Finally, we serve the audio of the song as well as the images simultaneously on 
 
 Example: The song Welcome to New York by Taylor Swift has a mood of "Happy", and one of the keywords from its lyrics is "New York". Hence we get images of "Happy New York City" 
 <br>
-![Welcome_to_New_York](/Demo/Welcome_to_New_York.png)
+![Welcome_to_New_York](/demo/Welcome_to_New_York.png)
 
 # How we built it
 The backend we used is Flask and we used the Tensorflow library to load the model. We also connected our application to a variety of APIs 
